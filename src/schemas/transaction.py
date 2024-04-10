@@ -5,7 +5,7 @@ from datetime import datetime
 from uuid import uuid4
 
 class Transaction(BaseModel):
-    id: str = Field(default_factory=uuid4, description="The id of the transaction")
+    id: str = Field(default_factory=lambda: str(uuid4()), description="The id of the transaction")
     date: datetime = Field(..., description="The date of the transaction")
     description: str = Field(..., min_length=3, max_length=50, description="The description of the transaction")
     worth: float = Field(..., gt=0, description="The worth of the transaction")
