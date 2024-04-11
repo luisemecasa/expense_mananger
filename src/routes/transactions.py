@@ -7,6 +7,7 @@ from src.schemas.transaction import Transaction
 from sqlalchemy.orm import Session
 from src import models, schemas
 from src.config.database import SessionLocal
+from sqlalchemy import func
 
 product_router = APIRouter()
 
