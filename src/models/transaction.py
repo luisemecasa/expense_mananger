@@ -5,7 +5,7 @@ from src.config.database import Base
 class Transaction(Base):
     __tablename__ = "transactions"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     date = Column(DateTime, index=True)
     description = Column(String, index=True)
     worth = Column(Float, index=True)

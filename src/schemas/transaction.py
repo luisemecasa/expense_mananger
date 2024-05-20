@@ -3,13 +3,16 @@ from pydantic import BaseModel , Field, validator
 from typing import Optional, List
 from datetime import datetime
 from uuid import uuid4
+from pydantic import BaseModel, Field, validator
+from typing import Optional, List
+from datetime import datetime
 
 class Transaction(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid4()), description="The id of the transaction")
     date: datetime = Field(..., description="The date of the transaction")
     description: str = Field(..., min_length=3, max_length=50, description="The description of the transaction")
     worth: float = Field(..., gt=0, description="The worth of the transaction")
     category: str = Field(..., description="The category of the transaction")
+    owner_id: Optional[int] = Field(None, description="The ID of the owner")
 
     @validator('worth')
     def worth_must_be_positive(cls, v):
@@ -24,12 +27,14 @@ class Transaction(BaseModel):
         return v
 
     class Config:
+        orm_mode = True
         json_schema_extra = {
             "example": {
-                "id": "",
-                "date": "2025-04-04",
+                "date": "2024-03-04",
                 "description": "Salary",
                 "worth": 500000,
-                "category": "Salary"
+                "category": "Salary",
+                "owner_id": 1
             }
         }
+        

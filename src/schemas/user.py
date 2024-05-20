@@ -1,9 +1,9 @@
-from pydantic import BaseModel
-from typing import List
+from pydantic import BaseModel, EmailStr
+from typing import List, Optional
 from src.schemas.transaction import Transaction
 
 class UserBase(BaseModel):
-    email: str
+    email: EmailStr
     name: str
 
 class UserCreate(UserBase):
@@ -11,7 +11,7 @@ class UserCreate(UserBase):
 
 class User(UserBase):
     id: int
-    is_active: bool
+    is_active: bool = True
     transactions: List[Transaction] = []
 
     class Config:

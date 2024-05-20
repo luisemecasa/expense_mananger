@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
 from src.config.database import Base
 
@@ -8,5 +8,5 @@ class User(Base):
     email = Column(String(length=64), unique=True, index=True)
     name = Column(String(length=60))
     password = Column(String(length=64))
-    is_active = Column(Boolean)
+    is_active = Column(Boolean, default=True)
     transactions = relationship("Transaction", back_populates="owner")
